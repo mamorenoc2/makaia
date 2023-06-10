@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+* {
+    font-family: 'Roboto' ;
+    margin: 30px;
+}
+
+.example {
+    background-color: cornflowerblue;
+    padding: 30px;
+}
+
+.example__content {
+    background-color: antiquewhite;
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 2px solid cornflowerblue;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practice</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+
+    </header>
+    <main>
+        <h1>JavaScript Practice</h1>
+        <section>
+            <div>
+                <h2>Demo of change with button function</h2>
+                <p id="demo">This is a paragraph</p>
+                <button type="button" onclick="buttonFunction()">Try to change this!</button>
+            </div>
+        </section>
+        <section>
+            <h2>JavaScript Output</h2>
+            <p>JavaScript can <q>display</q> data in different ways: </p>
+            <ul>
+                <li>Writing into an HTML element, using <b>innerHTML</b> </li>
+                <li>Writing into the HTML output using <b>document.write()</b> </li>
+                <li>Writing into an alert box, using <b>window.alert()</b> </li>
+                <li>Writing into the browser console, using <b>console.log()</b> </li>
+            </ul>
+            <hr>
+            <div>
+                <h3>Using innerHTML</h3>
+                <p>To access an HTML element, JavaScript can use the <b>document.getElementById('id') method.</b></p>
+                <p>The <b>id</b> attribute defines the HTML element. The <b>innerHTML</b> property defines the HTML content</p>
+                <div class="example">
+                    <h4>Example of a sum with innerHTML</h4>
+                    <div class="example__content">
+                        <h3 id="sum"></h3>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Using document.write()</h3>
+                <p>For testing purposes, it is convenient to use <b>document.write()</b>: </p>
+                <div class="example">
+                    <h4>Example of a sum with document.write()</h4>
+                    <div class="example__content">
+                        <button type="button" onclick="document.write(5 + 6)">Try It here!</button>
+                    </div>
+                    <p><b>Note:</b> The document.write() method should only be used for testing.</p>
+                </div>
+            </div>
+            <div>
+                <h3>Using window.alert()</h3>
+                <p>You can use an alert box to display data: </p>
+                <div class="example">
+                    <h4>Example of a sum with a document.write()</h4>
+                    <div class="example__content">
+                        <p>In JavaScript, the window object is the global scope object. This means that variables, properties, and methods by default belong to the window object.</p>
+                        <button type="button" onclick="alertFunction()">Try the alert Function!</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Using console.log()</h3>
+                <p>For debugging purposes, you can call the console.log() method in the browser to display data.</p>
+                <div class="example">
+                    <h4>Activate Debugging</h4>
+                    <div class="example__content">
+                        <p>F12 on your keyboard will activate debugging.</p>
+                        <p>Then select "Console" in the debugger menu.</p>
+                        <p>Then click Run again.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>JavaScript Print</h3>
+                <p>JavaScript does not have any print object or print methods</p>
+                <p>You cannot access output devices form JavaScript</p>
+                <p>The only exception is that you can call the <b>window.print()</b> method in the browser to print the content of the current window</p>
+                <div class="example">
+                    <h4>Example of print a page</h4>
+                    <div class="example__content">
+                        <button onclick="window.print()">Print this page</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>JavaScript Keywords</h2>
+            <p>JavaScript statements often start with a keyword to identify the JavaScript action to be performed.</p>
+            <p>Here is a list of some of the Keywords:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Keyword</th>
+                        <th>Description</th>
+                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>var</td>
+                            <td>Declares a variable</td>
+                        </tr>
+                        <tr>
+                            <td>let</td>
+                            <td>Declares a block variable</td>
+                        </tr>
+                        <tr>
+                            <td>const</td>
+                            <td>Declares a block constant</td>
+                        </tr>
+                        <tr>
+                            <td>if</td>
+                            <td>Marks a block of statements to be executed on a condition</td>
+                        </tr>
+                        <tr>
+                            <td>switch</td>
+                            <td>Marks a block of statements to be executed in different cases</td>
+                        </tr>
+                        <tr>
+                            <td>for</td>
+                            <td>Marks a block of statements to be executed in a loop</td>
+                        </tr>
+                        <tr>
+                            <td>function</td>
+                            <td>Declares a function</td>
+                        </tr>
+                        <tr>
+                            <td>return</td>
+                            <td>Exits a function</td>
+                        </tr>
+                        <tr>
+                            <td>try</td>
+                            <td>Implements error handling to a block of statements</td>
+                        </tr>
+                    </tbody>
+                </thead>
+            </table>
+        </section>
+        <section></section>
+    </main>
+    <footer>
+
+    </footer>
+    <script src="./js/myScript.js"></script>
+</body>
+</html>
