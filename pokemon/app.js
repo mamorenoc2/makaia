@@ -1,150 +1,170 @@
-const readline = require('readline');
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
-
-// Lista de usuarios
-const usuarios = [
-    {
-        nombre: "Admin",
-        documento: "123",
-        contraseña: "admin123",
-        tipo: 1 // Administrador
-    },
-    {
-        nombre: "Cliente",
-        documento: "456",
-        contraseña: "cliente123",
-        tipo: 2 // Cliente
-    }
+var usuarios = [
+    { nombre: "Administrador", documento: "admin", contrasena: "1234", tipo: 1 },
+    { nombre: "Cliente1", documento: "11111111", contrasena: "1234", tipo: 2 },
+    { nombre: "Cliente2", documento: "22222222", contrasena: "5678", tipo: 2 }
 ];
 
-// Array de objetos para almacenar la información del cajero
-let cajero = [];
+var cajero = [
+    { denominacion: 5000, cantidad: 0 },
+    { denominacion: 10000, cantidad: 0 },
+    { denominacion: 20000, cantidad: 0 },
+    { denominacion: 50000, cantidad: 0 },
+    { denominacion: 100000, cantidad: 0 }
+];
 
-// Función para cargar el cajero
-function cargarCajero() {
-    const billetes = [5, 10, 20, 50, 100];
-    cajero = [];
-    let i = 0;
+var usuarioActual = null;
 
-    const cargarSiguienteBillete = () => {
-        rl.question(`Ingrese la cantidad de billetes de ${billetes[i]} mil pesos: `, (cantidad) => {
-            cajero.push({
-                denominacion: billetes[i],
-                cantidad: parseInt(cantidad)
-            });
+function iniciarSesion() {
+    var documento = prompt("Ingrese su número de documento:");
+    var contrasena = prompt("Ingrese su contraseña:");
+    usuarioActual = null;
 
-            i++;
-            if (i < billetes.length) {
-                cargarSiguienteBillete();
-            } else {
-                console.log("Cajero cargado correctamente.");
-                obtenerSuma();
-                iniciarCajero();
-            }
-        });
-    };
-
-    cargarSiguienteBillete();
-}
-
-// Función para obtener la suma por cada denominación y el total general
-function obtenerSuma() {
-    let sumaTotal = 0;
-    for (let i = 0; i < cajero.length; i++) {
-        const denominacion = cajero[i].denominacion;
-        const cantidad = cajero[i].cantidad;
-        const sumaDenominacion = denominacion * cantidad;
-        console.log(`Suma de ${denominacion} mil pesos: ${sumaDenominacion} mil pesos`);
-        sumaTotal += sumaDenominacion;
-    }
-    console.log(`Total general: ${sumaTotal} mil pesos`);
-}
-
-// Función para retirar dinero del cajero
-function retirarDinero() {
-    const cantidadDeseada = parseInt(prompt("Ingrese la cantidad de dinero que desea retirar:"));
-    if (isNaN(cantidadDeseada)) {
-        console.log("Cantidad inválida.");
-        return;
-    }
-
-    let cantidadDisponible = 0;
-    let billetesEntregados = [];
-
-    for (let i = cajero.length - 1; i >= 0; i--) {
-        const denominacion = cajero[i].denominacion;
-        const cantidad = cajero[i].cantidad;
-
-        if (cantidad > 0) {
-            const cantidadBilletes = Math.floor(cantidadDeseada / denominacion);
-            const cantidadEntregada = Math.min(cantidadBilletes, cantidad);
-
-            billetesEntregados.push({
-                denominacion: denominacion,
-                cantidad: cantidadEntregada
-            });
-
-            cantidadDisponible += cantidadEntregada * denominacion;
-            cantidadDeseada -= cantidadEntregada * denominacion;
-
-            cajero[i].cantidad -= cantidadEntregada;
+    for (var i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].documento === documento && usuarios[i].contrasena === contrasena) {
+            usuarioActual = usuarios[i];
+            break;
         }
     }
 
-    if (cantidadDisponible < cantidadDeseada) {
-        console.log("No se puede retirar la cantidad solicitada.");
-        return;
-    }
-
-    console.log(`Se ha retirado ${cantidadDisponible} mil pesos, utilizando los siguientes billetes:`);
-    for (let i = 0; i < billetesEntregados.length; i++) {
-        const denominacion = billetesEntregados[i].denominacion;
-        const cantidad = billetesEntregados[i].cantidad;
-        console.log(`${cantidad} billete(s) de ${denominacion} mil pesos`);
+    if (usuarioActual) {
+        mostrarFormularioCajero();
+    } else {
+        alert("Usuario o contraseña incorrectos. Por favor, intente nuevamente.");
+        iniciarSesion();
     }
 }
 
-// Función principal
-function iniciarCajero() {
-    rl.question("Ingrese su número de documento: ", (documento) => {
-        rl.question("Ingrese su contraseña: ", (contraseña) => {
-            let usuarioEncontrado = false;
-            let esAdministrador = false;
-
-            for (let i = 0; i < usuarios.length; i++) {
-                if (usuarios[i].documento === documento && usuarios[i].contraseña === contraseña) {
-                    usuarioEncontrado = true;
-                    if (usuarios[i].tipo === 1) {
-                        esAdministrador = true;
-                    }
-                    break;
-                }
-            }
-
-            if (!usuarioEncontrado) {
-                console.log("Usuario no existe.");
-                iniciarCajero();
-            } else {
-                if (esAdministrador) {
-                    cargarCajero();
-                } else {
-                    if (cajero.length === 0) {
-                        console.log("Cajero en mantenimiento, vuelva pronto.");
-                        iniciarCajero();
-                    } else {
-                        retirarDinero();
-                        obtenerSuma();
-                    }
-                }
-                iniciarCajero();
-            }
-        });
-    });
+function mostrarFormularioCajero() {
+    if (usuarioActual.tipo === 1) {
+        cargarCajero();
+    } else {
+        retirarDinero();
+    }
 }
 
-// Iniciar el cajero
-iniciarCajero();
+function cargarCajero() {
+    var billete5 = parseInt(prompt("Ingrese la cantidad de billetes de $5000:"));
+    var billete10 = parseInt(prompt("Ingrese la cantidad de billetes de $10000:"));
+    var billete20 = parseInt(prompt("Ingrese la cantidad de billetes de $20000:"));
+    var billete50 = parseInt(prompt("Ingrese la cantidad de billetes de $50000:"));
+    var billete100 = parseInt(prompt("Ingrese la cantidad de billetes de $100000:"));
+
+    cajero[0].cantidad += billete5;
+    cajero[1].cantidad += billete10;
+    cajero[2].cantidad += billete20;
+    cajero[3].cantidad += billete50;
+    cajero[4].cantidad += billete100;
+
+    mostrarInformacionCajero();
+}
+
+function mostrarInformacionCajero() {
+    var totalGeneral = 0;
+    var mensaje = "";
+
+    for (var i = 0; i < cajero.length; i++) {
+        var subtotal = cajero[i].denominacion * cajero[i].cantidad;
+        totalGeneral += subtotal;
+        mensaje += "Billetes de $" + cajero[i].denominacion + ": " + cajero[i].cantidad + " (Total: $" + subtotal + ")\n";
+    }
+
+    mensaje += "Total General: $" + totalGeneral;
+    alert(mensaje);
+    reiniciarCajero();
+}
+
+function reiniciarCajero() {
+    var opcion = confirm("¿Desea realizar otra operación en el cajero?");
+    if (opcion) {
+        iniciarSesion();
+    } else {
+        alert("Gracias por utilizar el cajero. ¡Hasta luego!");
+    }
+}
+
+function retirarDinero() {
+    if (cajeroVacio()) {
+        alert("Cajero en mantenimiento, vuelva pronto.");
+        reiniciarCajero();
+    } else {
+        var cantidadRetiro = parseInt(prompt("Ingrese la cantidad a retirar:"));
+
+        if (cantidadRetiro <= 0) {
+            alert("La cantidad de retiro debe ser mayor a cero.");
+            retirarDinero();
+            return;
+        }
+
+        var billetesEntregados = retirarDineroCajero(cantidadRetiro);
+
+        if (billetesEntregados) {
+            mostrarResultado(cantidadRetiro, billetesEntregados);
+        } else {
+            alert("No es posible entregar la cantidad solicitada. Por favor, intente con una cantidad menor.");
+            retirarDinero();
+        }
+    }
+}
+
+function cajeroVacio() {
+    for (var i = 0; i < cajero.length; i++) {
+        if (cajero[i].cantidad > 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function retirarDineroCajero(cantidadRetiro) {
+    var billetesEntregados = [];
+
+    for (var i = cajero.length - 1; i >= 0; i--) {
+        var cantidadBillete = Math.floor(cantidadRetiro / cajero[i].denominacion);
+
+        if (cantidadBillete > cajero[i].cantidad) {
+            cantidadBillete = cajero[i].cantidad;
+        }
+
+        if (cantidadBillete > 0) {
+            billetesEntregados.push({ denominacion: cajero[i].denominacion, cantidad: cantidadBillete });
+            cantidadRetiro -= cantidadBillete * cajero[i].denominacion;
+        }
+    }
+
+    if (cantidadRetiro > 0) {
+        return null;
+    }
+
+    actualizarCajero(billetesEntregados);
+    return billetesEntregados;
+}
+
+function actualizarCajero(billetesEntregados) {
+    for (var i = 0; i < billetesEntregados.length; i++) {
+        for (var j = 0; j < cajero.length; j++) {
+            if (billetesEntregados[i].denominacion === cajero[j].denominacion) {
+                cajero[j].cantidad -= billetesEntregados[i].cantidad;
+                break;
+            }
+        }
+    }
+}
+
+function mostrarResultado(cantidadRetiro, billetesEntregados) {
+    var mensaje = "Cantidad solicitada: $" + cantidadRetiro + "\nBilletes entregados:\n";
+
+    for (var i = 0; i < billetesEntregados.length; i++) {
+        mensaje += "Billetes de $" + billetesEntregados[i].denominacion + ": " + billetesEntregados[i].cantidad + "\n";
+    }
+
+    var dineroRestante = "Dinero restante en el cajero:\n";
+
+    for (var i = 0; i < cajero.length; i++) {
+        dineroRestante += "Billetes de $" + cajero[i].denominacion + ": " + cajero[i].cantidad + "\n";
+    }
+
+    alert(mensaje + "\n" + dineroRestante);
+    reiniciarCajero();
+}
+
+iniciarSesion();

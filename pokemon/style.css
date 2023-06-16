@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    font-family: sans-serif;
 }
 
 :root {
@@ -76,5 +77,69 @@ body {
 }
 
 .papa_info {
+    display: flex;
+    padding: 15px;
+    justify-content: space-around;
+}
+
+.title {
+    font-weight: bold;
+    color: var(--moradoOscuro);
+}
+
+.desc{
+    color: black;
+}
+
+.hijo-info span{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer {
+    display: flex;
+    padding: 10px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    border-radius: 0 0 15px 15px;
+}
+
+.footer img {
+    margin: 30px;
+    width: 80px;
+}
+
+@media screen and (max-width: 800px) {
+    .footer img {
+        margin: 20px;
+        width: 70px;
+    }
+}
+
+@media all and (min-width: 600px) {
+    .contenedor { flex: 1 0 0; }
+}
+
+@media screen and (max-width: 375px) {
+    .main_container {
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .footer > * {
+        padding: 10px;
+        flex: 2 50%;
+    }
     
+    .footer img {
+        margin: 20px;
+        width: 50px;
+    }
 }
