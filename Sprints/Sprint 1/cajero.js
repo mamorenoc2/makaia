@@ -90,13 +90,38 @@ function preguntarEstado() {
 
 function retirarDinero() {
     /**Funcion que me permite retirar dinero del cajero
-     * * si el cajero está vacio da un mensaje de mantenimiento
+     * * si la funcion cajeroVacio es verdadero da un mensaje de mantenimiento
+     * * Si hay dinero en el cajero se dirije a la funcicion de retirar
      */
     if (cajeroVacio()) {
         alert('Cajero en mantenimiento, !Vuelva pronto!.');
-        preguntarEstado()
+        preguntarEstado();
+    } else {
+
+        let dineroARetirar = parseInt(prompt("Ingrese la cantidad a retirar: "));
+
+        //El retiro tiene que ser mayor que cero 
+        if (dineroARetirar <= 0) {
+            alert("La cantidad a retirar tiene que ser mayor o igual a cero, intenta de nuevo");
+            retirarDinero();
+            return;
+        }
+
+        let dineroRetirado = retirarDineroCajero(dineroARetirar);
+
     }
+
     
+    
+}
+
+function retirarDineroCajero(dineroRetirado) {
+    let billetesEntregados = [];
+
+    for (let i = cajero.length - 1; i >= 0; i--) {
+        let cantidadBillete = Mathfloor(dineroRetirado / cajero[i].billetes);
+        
+    }
 }
 
 function cajeroVacio() {
