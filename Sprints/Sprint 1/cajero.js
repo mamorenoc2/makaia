@@ -13,11 +13,13 @@ const cajero = [
 ];
 
 let usuarioActual = null;
+let intentos = 3;
 
 function inicioSesion() {
     let documento = prompt("Ingrese su documento: ");
     let contrasena = prompt("Ingrese su contrasena: ");
     usuarioActual = null;
+    
 
     for (let i = 0; i < usuarios.length; i++) {
         if (usuarios[i].documento === documento && usuarios[i].contrasena == contrasena) {
@@ -29,16 +31,33 @@ function inicioSesion() {
     if (usuarioActual) {
         alert("Bienvenid@ " + usuarioActual.nombre);
         mostrarCajero();
-    } else {
-        alert("Usuario o contaseña incorrectos. Por favor intente nuevamente");
+    } else if (intentos > 0) {
+        alert("Usuario o contaseña incorrectos. Numero de intentos " + intentos );
+        intentos--;
         inicioSesion();
+    } else {
+        alert("No se ha podido iniciar sección, hasta pronto");
     }
 }
 
 function mostrarCajero() {
     if (usuarioActual.tipo === 1) {
+        let opcion = prompt(
+            "Opciones disponibles:\n1. Actualizar saldo\n2. Mostrar saldo\nSeleccione una opción:"
+        );
+        switch (opcion) {
+            case "1":
+                cargarCajero();
+                break;
+            case "2":
+                mostrarCantidadDinero();
+                break;
+            default:
+                alert("Opción inválida. Por favor, seleccione una opción válida.");
+                mostrarCajero();
+                break;
+        }
         //Solo los administradores pueden cargar dinero
-        cargarCajero();
     } else {
         retirarDinero();
     }
@@ -108,20 +127,71 @@ function retirarDinero() {
         }
 
         let dineroRetirado = retirarDineroCajero(dineroARetirar);
-
+        
+        if (dineroRetirado) {
+            mostrarResultado(dineroARetirar, dineroRetirado);
+        } else {
+            alert("No es posible entregar la cantidad solicitada. Por favor, intente con una cantidad menor.");
+            retirarDinero();
+        }
     }
-
-    
-    
 }
 
-function retirarDineroCajero(dineroRetirado) {
-    let billetesEntregados = [];
+function retirarDineroCajero(dineroARetirar) {
+    // Array que almacenará los billetes entregados al cliente
+    let dineroRetirado = [];
 
+    // Recorremos el array de cajero de forma inversa para priorizar las denominaciones más altas
     for (let i = cajero.length - 1; i >= 0; i--) {
-        let cantidadBillete = Mathfloor(dineroRetirado / cajero[i].billetes);
+        // Calculamos la cantidad de billetes a entregar
+        let cantidadBillete = Math.floor(dineroARetirar / cajero[i].billetes);
+        
+        if (cantidadBillete > cajero[i].cantidad) {
+            // Si la cantidad de billetes a retirar es mayor a los disponibles, ajustamos la cantidad a los disponibles
+            cantidadBillete = cajero[i].cantidad;
+        }
+
+        if (cantidadBillete > 0) {
+            // Si la cantidad de billetes a entregar es mayor a cero, agregamos la información al array de billetes entregados
+            dineroRetirado.push({ billetes: cajero[i].billetes, cantidad: cantidadBillete});
+
+            //Actualizamos la cantidad a retirar restando el valor de los billetes entregados
+            dineroARetirar -= cantidadBillete * cajero[i].billetes;
+        }
         
     }
+
+    if (dineroARetirar > 0) {
+        // Si queda una cantidad pendiente de retirar, significa que no se puede entregar la cantidad solicitada, por lo que retornamos null
+        return null;
+    }
+
+    actualizarCajero(dineroRetirado); // Llamamos a la función para actualizar la cantidad de billetes en el cajero
+    return dineroRetirado;
+}
+
+function actualizarCajero(dineroRetirado) {
+    // Recorremos los billetes entregados
+    for (let i = 0; i < dineroRetirado.length; i++) {
+        // Buscamos los billetes correspondientes en el array de cajero
+        for (let j = 0; j < cajero.length; j++) {
+            if (dineroRetirado[i].billetes === cajero[j].billetes) {
+                // Restamos la cantidad de billetes entregados al cajero
+                cajero[j].cantidad -= dineroRetirado[i].cantidad;
+                break;
+            }
+        }
+    }
+}
+
+function mostrarResultado(dineroARetirar, dineroRetirado) {
+    let mensaje = "Dinero Solicitado: $" + dineroARetirar + "\nBilletes entregados:\n";
+    for (let i = 0; i < dineroRetirado.length; i++) {
+        mensaje += "Billetes de $" + dineroRetirado[i].billetes + ": " + dineroRetirado[i].cantidad + "\n";
+    }
+
+    alert(mensaje);
+    preguntarEstado();
 }
 
 function cajeroVacio() {
