@@ -1,0 +1,16 @@
+body {
+    background-color: #7b2cbf;
+    color: white;
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.contador button {
+    margin: 0 15px;
+    padding: 10px;
+}
+
+.contador span,
+.contador button {
+    font-size: x-large;
+}
