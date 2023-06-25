@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Genero</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Formulario con genero</h1>
+    <form action="/" id="form" class="form">
+        <label for="genero" class="titulo">genero:</label>
+        
+        <div class="form-radio-group">
+            <input type="radio" id="masculino" name="genero" value="masculino" required>
+            <label for="masculino">masculino</label>
+        </div>
+        
+        <div class="form-radio-group">
+            <input type="radio" id="femenino" name="genero" value="femenino" required>
+            <label for="femenino">femenino</label>
+        </div>
+        
+        <div class="form-radio-group">
+            <input type="radio" id="otro" name="genero" value="otro" required>
+            <label for="otro">otro</label>
+        </div>
+
+        <button type="submit" class="btn">Guardar</button>
+
+        <div id="generoSelecionado" class="generoSelecionado"></div>
+    </form>
+    <script src="formularioGenero.js"></script>
+</body>
+</html>

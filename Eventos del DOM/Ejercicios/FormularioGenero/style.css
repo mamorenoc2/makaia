@@ -1,0 +1,56 @@
+body {
+    background-color: #005f73;
+    color: #001219;
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form {
+    margin: auto;
+    width: 400px;
+    height: 200px;
+    border-radius: 25px;
+    background-color: #0a9396;
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+}
+
+.form .titulo {
+    color: white;
+    font-weight: 600;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.form .form-radio-group{
+    font-size: large;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form .btn {
+    font-weight: 700;
+    background-color: #005f73;
+    color: #001219;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 20px auto;
+    width: 50%;
+    transition: border-width 0.3s; 
+}
+
+.form .btn:hover {
+    background-color: white;
+    color: #001219;
+    border: 3px solid #005f73;
+}
+
+.generoSelecionado {
+    color: white;
+    font-size: large;
+    background-color: #005f73;
+    margin: 0px 0;
+}

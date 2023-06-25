@@ -1,0 +1,45 @@
+* {
+    color: palevioletred;
+    background-color: papayawhip;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form label {
+    text-transform: capitalize;
+}
+
+.form input {
+    background-color: whitesmoke;
+    border: 1px solid palevioletred;
+    border-radius: 15px;
+    margin: 10px auto;
+    width: 80%;
+    padding: 5px;
+}
+
+.form .btn {
+    width: 80%;
+    margin: 15px auto;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: palevioletred;
+    color: whitesmoke;
+    font-weight: 600;
+}
+
+.form .btn:hover {
+    background-color: whitesmoke;
+    color: palevioletred;
+    border: 1px solid palevioletred;
+
+}
