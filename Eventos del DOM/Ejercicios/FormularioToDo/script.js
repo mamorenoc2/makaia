@@ -17,15 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const taskItem = document.createElement('li');
             // Crea un nuevo elemento 'span' para mostrar el texto de la tarea
             const taskSpan = document.createElement('span');
-            // Nuevo elemento para la fecha límite
-            const taskDeadline = document.createElement('span');
             // Asigna el texto de la tarea al elemento 'span'
             taskSpan.textContent = taskText;
-
-            const deadlineDate = document.getElementById('dateDue').value;
-            taskDeadline.textContent = deadlineDate; // Establece la fecha límite en el elemento span
-            // Establece el atributo 'type' del input como 'date'
-            taskDeadline.setAttribute('type', 'date'); 
             // Crea un nuevo botón para eliminar la tarea
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Eliminar';
@@ -36,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             // Agrega el elemento 'span' y el botón de eliminar al elemento 'li'
             taskItem.appendChild(taskSpan);
-            taskItem.appendChild(taskDeadline);
             taskItem.appendChild(deleteButton);
             // Agrega el elemento 'li' a la lista de tareas
             taskList.appendChild(taskItem);

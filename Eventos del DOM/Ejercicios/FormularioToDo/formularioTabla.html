@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario TODO Formulario</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="formContainer">
+        <h1>Lista de tareas</h1>
+        <form id="taskForm">
+            <input type="text" id="taskInput" placeholder="Ingrese una tarea">
+            <button type="submit">Agregar tarea</button>
+        </form>
+    </div>
+    
+    <table >
+        <thead>
+            <tr>
+                <th>Lista de tarea</th>
+                <th>Completado</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody id="taskList">
+        </tbody>
+    </table>
+    <script src="./tabla.js"></script>
+</body>
+</html>
