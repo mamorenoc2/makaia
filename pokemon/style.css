@@ -2,7 +2,6 @@
     margin: 0;
     font-family: sans-serif;
 }
-
 :root {
     --moradoOscuro : #954FB1;
     --moradoClaro : #b79ac3;
@@ -111,16 +110,39 @@ body {
     width: 80px;
 }
 
-@media screen and (max-width: 800px) {
+
+/* Estilos para pantallas pequeñas */
+@media screen and (max-width: 700px) {
+    .titulo h2{
+        font-size: 20px;
+    }
+    .titulo figure img {
+        width: 30px;
+        height: 30px;
+    }
+    .footer {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    /* Agrega aquí los estilos específicos para pantallas pequeñas */
+}  
+
+@media screen and (max-width: 480px){
+    .main_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+/* @media screen and (max-width: 800px) {
     .footer img {
         margin: 20px;
         width: 70px;
     }
-}
+} */
 
-@media all and (min-width: 600px) {
-    .contenedor { flex: 1 0 0; }
-}
+
 
 @media screen and (max-width: 375px) {
     .main_container {
